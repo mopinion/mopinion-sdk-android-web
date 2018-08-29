@@ -49,7 +49,7 @@ android {
 ...
 dependencies {
     ...
-    implementation "com.mopinion.mopinionsdk:mopinionsdkweb:0.1.0"
+    implementation "com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.0"
 }
 ```
 
