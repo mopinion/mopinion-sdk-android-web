@@ -14,6 +14,9 @@ The Mopinion Mobile SDK Library can be installed by adding it `build.gradle` fil
 
 You can see what your mobile forms will look like in your app by downloading our [Mopinion Forms](https://play.google.com/store/apps/details?id=com.mopinion.news) preview app in the Google Play Store.
 
+### dependencies
+
+- [Google Volley](https://github.com/google/volley)
 
 ### Android Studio
 
@@ -50,6 +53,7 @@ android {
 dependencies {
     ...
 	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.0@aar')
+	implementation 'com.android.volley:volley:1.1.1'
 }
 ```
 
