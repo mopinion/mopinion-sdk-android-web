@@ -52,7 +52,7 @@ android {
 ...
 dependencies {
     ...
-	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.4@aar')
+	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.5@aar')
 	implementation 'com.android.volley:volley:1.1.1'
 }
 ```
@@ -101,6 +101,7 @@ M.data(String key, String value);
 ```
 
 Example:
+
 ```java
 import com.mopinion.mopinionsdkweb.*;
 ...
