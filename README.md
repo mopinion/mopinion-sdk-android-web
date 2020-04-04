@@ -52,7 +52,7 @@ android {
 ...
 dependencies {
     ...
-	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.6@aar')
+	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.7@aar')
 	implementation 'com.android.volley:volley:1.1.1'
 }
 ```
@@ -72,6 +72,8 @@ The SDK needs to connect to the Mopinion servers so the internet permission shou
 
 ### implement the SDK
 ```java
+import com.mopinion.mopinionsdkweb.*;
+...
 Mopinion M = new Mopinion(Context context, String key, boolean log);
 M.event(String event);
 ```
