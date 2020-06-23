@@ -42,17 +42,14 @@ android {
 	defaultConfig {
 		...
 		ndk {
-		        abiFilters "armeabi", "armeabi-v7a", "x86", "x86_64", "mips", "mips64"
-	    }
-	    packagingOptions {
-			 exclude "lib/arm64-v8a/libgnustl_shared.so"
+		        abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64", "mips", "mips64"
 	    }
 	}
 }
 ...
 dependencies {
     ...
-	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.7@aar')
+	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.8@aar')
 	implementation 'com.android.volley:volley:1.1.1'
 }
 ```
