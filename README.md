@@ -10,7 +10,7 @@ There are also other Mopinion SDK's available:
 
 ## install
 
-The Mopinion Mobile SDK Library can be installed by adding it `build.gradle` file of your project.
+The Mopinion Mobile SDK Library can be installed by adding it to the `build.gradle` file of your project. The minimal required Android API level is 19.
 
 You can see what your mobile forms will look like in your app by downloading our [Mopinion Forms](https://play.google.com/store/apps/details?id=com.mopinion.news) preview app in the Google Play Store.
 
@@ -34,7 +34,7 @@ allprojects {
 }
 ```
 
-In the `build.gradle` file of your main component add the Mopinion SDK Library:
+In the `build.gradle` file of your main module, add the Mopinion SDK Library:
 
 ```gradle
 android {
@@ -42,14 +42,14 @@ android {
 	defaultConfig {
 		...
 		ndk {
-		        abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64", "mips", "mips64"
+		        abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
 	    }
 	}
 }
 ...
 dependencies {
     ...
-	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.1.8@aar')
+	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.2.0@aar')
 	implementation 'com.android.volley:volley:1.1.1'
 }
 ```
@@ -68,6 +68,9 @@ The SDK needs to connect to the Mopinion servers so the internet permission shou
 ```
 
 ### implement the SDK
+
+In the activity source file, include these lines to import, open and call the MopinionSDK:
+
 ```java
 import com.mopinion.mopinionsdkweb.*;
 ...
@@ -75,10 +78,10 @@ Mopinion M = new Mopinion(Context context, String key, boolean log);
 M.event(String event);
 ```
 
-The `context` is the Activity context from which you would like to activate the feedback form, normally `this`.
-The `key` should be replaced with your specific deployment key. This key can be found in your Mopinion account at the `Feedback forms` section under `Deployments`.
-The `log` flag can be set to `true` while developing the app to see Logcat messages in Android Studio from the Mopinion SDK library. (The default is `false` if not given.)
-The `event` is a specific event that can be connected to a feedback form action in the Mopinion system.  
+* The `context` is the Activity context from which you would like to activate the feedback form, normally `this`.
+* The `key` should be replaced with your specific deployment key. This key can be found in your Mopinion account at the `Feedback forms` section under `Deployments`.
+* The `log` flag can be set to `true` while developing the app to see Logcat messages in Android Studio from the Mopinion SDK library. (The default is `false` if not supplied.)
+* The `event` is a specific event that can be connected to a feedback form action in the Mopinion system.  
 The default `_button` event triggers the form, but an unlimited number of custom events can also be added.
 
 ### example:
@@ -88,6 +91,8 @@ import com.mopinion.mopinionsdkweb.*;
 Mopinion M = new Mopinion(this, "12345abcde");
 M.event("_button");
 ```
+
+Note that the event call is asynchronous.
 
 ## extra data
 
