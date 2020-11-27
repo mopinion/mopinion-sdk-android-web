@@ -12,6 +12,7 @@ There are also other Mopinion SDK's available:
 ### New features in 0.2.2
 - The new method `evaluate()` and its asynchronous callback response `onMopinionEvaluate()` allow you to verify whether or not a form would be opened for a specified event. 
 - The new method `openFormAlways()`, to be used with the `onMopinionEvaluate()` method, allows you to open a form regardless of any proactive conditions set in the deployment.
+- The deployment condition "Show only on specific OS version" is implemented to check the Android version. Earlier the version number was ignored, it only checked the OS.
 
 
 ## install
