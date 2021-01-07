@@ -46,17 +46,11 @@ In the `build.gradle` file of your main module, add the Mopinion SDK Library:
 ```gradle
 android {
 	...
-	defaultConfig {
-		...
-		ndk {
-		        abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-	    }
-	}
 }
 ...
 dependencies {
     ...
-	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.2.1@aar')
+	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.2.2@aar')
 	implementation 'com.android.volley:volley:1.1.1'
 }
 ```
