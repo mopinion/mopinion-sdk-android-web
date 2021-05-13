@@ -9,6 +9,12 @@ There are also other Mopinion SDK's available:
 - [Android SDK (React Native required)](https://github.com/mopinion/mopinion-sdk-android)
 
 ## Release notes for version 0.2.2
+
+### Artifact location change
+- Our SDK has changed location as bintray has stopped service from May 2021.
+- Resultingly, in your main project `build.gradle` file, our SDK no longer needs the lines with `maven { ... dl.bintray.com ... }` and `jcenter()`.
+- Also the implementation path has changed. We've updated our instructions here to reflect this.
+
 ### New features in 0.2.2
 - The new method `evaluate()` and its asynchronous callback response `onMopinionEvaluate()` allow you to verify whether or not a form would be opened for a specified event. 
 - The new method `openFormAlways()`, to be used with the `onMopinionEvaluate()` method, allows you to open a form regardless of any proactive conditions set in the deployment.
@@ -33,14 +39,12 @@ In the main project `build.gradle` file add the following:
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven {
-            url  "https://dl.bintray.com/mopinion/MopinionSDK"
-        }
+        maven { url 'http://jitpack.io' }
     }
 }
 ```
 
+ 
 In the `build.gradle` file of your main module, add the Mopinion SDK Library:
 
 ```gradle
@@ -50,8 +54,7 @@ android {
 ...
 dependencies {
     ...
-	implementation('com.mopinion.mopinionsdkweb:mopinionsdkweb:0.2.2@aar')
-	implementation 'com.android.volley:volley:1.1.1'
+	implementation 'com.mopinion:mopinion-sdk-web:0.2.2'
 }
 ```
 
