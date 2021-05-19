@@ -14,7 +14,6 @@ There are also other Mopinion SDK's available:
 - Our SDK has changed location as bintray has stopped service from May 2021.
 - Resultingly, in your main project `build.gradle` file, our SDK no longer needs the lines with `maven { ... dl.bintray.com ... }` and `jcenter()`.
 - Also the implementation path has changed.
-- This change bumps the version from 0.2.2 to 0.2.9
 - We've updated our instructions here to reflect this.
 
 ### New features in 0.2.2
@@ -56,7 +55,7 @@ android {
 ...
 dependencies {
     ...
-	implementation 'com.mopinion:mopinion-sdk-web:0.2.9'
+	implementation 'com.mopinion:mopinion-sdk-web:0.2.2'
 }
 ```
 
