@@ -15,6 +15,7 @@ There are also other Mopinion SDK's available:
 - Resultingly, in your main project `build.gradle` file, our SDK no longer needs the lines with `maven { ... dl.bintray.com ... }` and `jcenter()`.
 - Also the implementation path has changed.
 - We've updated our instructions here to reflect this.
+- Android Studio may falsely suggest there is a newer version 0.2.9 available. That version doesn't exist. Use the 0.2.2 version as specified in these instructions.
 
 ### New features in 0.2.2
 - The new method `evaluate()` and its asynchronous callback response `onMopinionEvaluate()` allow you to verify whether or not a form would be opened for a specified event. 
