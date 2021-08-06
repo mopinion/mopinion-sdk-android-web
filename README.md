@@ -27,6 +27,7 @@ There are also other Mopinion SDK's available:
 - The new callback behaviour is optional. You don't need to change your existing code, the SDK by default will behave as before without making callbacks.
 
 <br>
+
 ## <a name="install">install</a>
 
 Install the Mopinion Mobile SDK Library by adding it to the `build.gradle` file of your project. The minimal required Android API level is 19.
@@ -78,6 +79,7 @@ The SDK needs to connect to the Mopinion servers so the internet permission shou
 ```
 
 <br>
+
 ### <a name="implement">implement the SDK</a>
 
 In the activity source file, include these lines to import, open and call the MopinionSDK:
@@ -109,6 +111,7 @@ M.event("_button");
 Note that the event call is asynchronous.
 
 <br>
+
 ## <a name="extra-data">extra data</a>
 
 From version `0.1.4` it's also possible to send extra data from the app to your form. 
@@ -159,6 +162,7 @@ M.removeData()
 ```
 
 <br>
+
 ## <a name="evaluate-conditions">Evaluate if a form will open</a>
 The event() method of the SDK autonomously checks deployment conditions and opens a form, or not.
 
@@ -258,6 +262,7 @@ It's also possible to integrate the callback handler directly in the evaluate() 
 ```
 
 <br>
+
 ## <a name="callback-mode">Using callback mode</a>
 By default the SDK manages the feedback form autonomously without further involving your app. 
 Version 0.3.0 introduces asynchronous callbacks to inform your code of certain actions (MopinionEvent). 
@@ -276,6 +281,7 @@ Provide a callback handler to receive a response, containing either data or poss
 You can also provide an optional error-callback handler to `event()` to seperately receive responses with error information. In that case the primary handler only receives responses without errors.
 
 <br>
+
 ### Callback variants of the `event()` method
 Triggers an event you defined in your deployment to open a form and receive MopinionEvent callbacks. If you don't specify a failHandler, the callback handler will also receive error responses.
 
@@ -292,6 +298,7 @@ Parameters:
 * `failHandler`: The method implementing the `MopinionEventErrorListener` interface to handle the `onMopinionEventError()` callback for MopinionEvents that resulted in errors.
 
 <br>
+
 ### Callback methods `onMopinionEvent()` and `onMopinionEventError()`
 
 These methods you implement in your code to receive MopinionEvents. They have the same parameters to pass you a response with optional additional information. 
@@ -312,6 +319,7 @@ Parameters:
 * `response`: The MopinionResponse object containing additional information on the MopinionEvent. The response is never `null`, but use its `hasData()` methods to check if it contains any additional data, or `hasErrors()` for errors.
 
 <br>
+
 ### MopinionResponse object
 The data collection present in this object depends on the kind of MopinionEvent and its origin. The data is a key-value collection. Both data and errors can be missing. The response object contains methods to inspect and retrieve them. 
 
@@ -326,6 +334,7 @@ FORM_KEY|.getString()|the internal unique identifier for the form
 FORM_NAME|.getString()|the name of the form. Distinct from the title of the form.
 
 <br>
+
 #### MopinionEvents and provided data in `response`
 This is the data that can be present for a certain MopinionEvent:
 
@@ -348,11 +357,13 @@ The order in which MopinionEvents occur is:
 	3. FORM_CLOSED
 
 <br>
+
 #### Reading `response` errors
 Call `response.hasErrors()` on, followed by `response.getErrorString()` to get the error as text.
 The `getErrorString()` method might return `null`.
 
 <br>
+
 ### Callback handler example
 Pseudo code to show the usage of the `event()` callback using the involved objects.
 
@@ -403,6 +414,7 @@ new MopinionEventErrorListener() {
 ```
 
 <br>
+
 ## <a name="edit-triggers">Edit triggers</a>
 In the Mopinion deployment editor you can define event names and triggers that will work with the SDK event names that you used in your app.
 Login to your Mopinion account and go to Data collection, Deployments to use this functionality.
