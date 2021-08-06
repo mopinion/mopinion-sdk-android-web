@@ -8,26 +8,29 @@ There are also other Mopinion SDK's available:
 - [iOS web SDK](https://github.com/mopinion/mopinion-sdk-ios-web)
 - [Android SDK (React Native required)](https://github.com/mopinion/mopinion-sdk-android)
 
-## Release notes for version 0.2.2
+### Contents
 
-### Artifact location change
-- Our SDK has changed location as bintray has stopped service from May 2021.
-- Resultingly, in your main project `build.gradle` file, our SDK no longer needs the lines with `maven { ... dl.bintray.com ... }` and `jcenter()`.
-- Also the implementation path has changed.
-- We've updated our instructions here to reflect this.
-- Android Studio may falsely suggest there is a newer version 0.2.9 available. That version doesn't exist. Use the 0.2.2 version as specified in these instructions.
+- Release notes
+- [Installation](#install)
+- [Implement the SDK](#implement)
+- [Submitting extra data](#extra-data)
+- [Evaluate if a form will open](#evaluate-conditions)
+- [Using callback mode](#callback-mode)
+- [Edit triggers](#edit-triggers)
 
-### New features in 0.2.2
-- The new method `evaluate()` and its asynchronous callback response `onMopinionEvaluate()` allow you to verify whether or not a form would be opened for a specified event. 
-- The new method `openFormAlways()`, to be used with the `onMopinionEvaluate()` method, allows you to open a form regardless of any proactive conditions set in the deployment.
-- The deployment condition "Show only on specific OS version" is implemented to check the Android version. Earlier the version number was ignored, it only checked the OS.
+## Release notes for version 0.3.0
 
+### New features in 0.3.0
+- 2 new variants of the method `event()` add a asynchronous callback response `onMopinionEvent()`, to let you receive a certain `MopinionEvent` from the SDK about the feedback form.
+- Currently supported `MopinionEvents` are when the form is displayed, when the user submitted the form or when the form closed.
+- The callback includes an object `MopinionResponse` that can optionally contain data associated with some events. Data can be for example the form key, the form name or miscellanous data as JSONObject.
+- The new callback behaviour is optional. You don't need to change your existing code, the SDK by default will behave as before without making callbacks.
 
-## install
+## <a name="install">install</a>
 
-The Mopinion Mobile SDK Library can be installed by adding it to the `build.gradle` file of your project. The minimal required Android API level is 19.
+Install the Mopinion Mobile SDK Library by adding it to the `build.gradle` file of your project. The minimal required Android API level is 19.
 
-You can see what your mobile forms will look like in your app by downloading our [Mopinion Forms](https://play.google.com/store/apps/details?id=com.mopinion.news) preview app in the Google Play Store.
+Download our [Mopinion Forms](https://play.google.com/store/apps/details?id=com.mopinion.news) app from the Google Play Store to preview what your mobile forms will look like in your app.
 
 ### dependencies
 
@@ -56,7 +59,7 @@ android {
 ...
 dependencies {
     ...
-	implementation 'com.mopinion:mopinion-sdk-web:0.2.2'
+	implementation 'com.mopinion:mopinion-sdk-web:0.3.0'
 }
 ```
 
@@ -73,14 +76,17 @@ The SDK needs to connect to the Mopinion servers so the internet permission shou
 		...
 ```
 
-### implement the SDK
+### <a name="implement">implement the SDK</a>
 
 In the activity source file, include these lines to import, open and call the MopinionSDK:
 
 ```java
 import com.mopinion.mopinionsdkweb.*;
 ...
+// idealy only init this once, i.e. in an onCreate()
 Mopinion M = new Mopinion(Context context, String key, boolean log);
+...
+// somewhere else in the same class
 M.event(String event);
 ```
 
@@ -100,11 +106,11 @@ M.event("_button");
 
 Note that the event call is asynchronous.
 
-## extra data
+## <a name="extra-data">extra data</a>
 
 From version `0.1.4` it's also possible to send extra data from the app to your form. 
-This can be done by adding a key and a value to the `data()` method.
-The data should be added before the `event()` method is called if you want to include the data in the form that comes up for that event.
+To do this, supply a key and a value to the `data()` method.
+Add the data before calling the `event()` method if you want to include the data in the form that comes up for that event.
 
 ```java
 M.data(String key, String value);
@@ -149,14 +155,14 @@ Example:
 M.removeData()
 ```
 
-## Evaluate if a form will open
+## <a name="evaluate-conditions">Evaluate if a form will open</a>
 The event() method of the SDK autonomously checks deployment conditions and opens a form, or not.
 
 From SDK version `0.2.2` you can use the evaluate() and related methods to give your app more control on opening a form for proactive events or take actions when no form would have opened.
 
 It can also be used on passive events, but such forms will always be allowed to open.
 
-###Procedure overview
+### Procedure overview
 
 1. Call the `evaluate()` method and pass it a callback function that implements the `Mopinion.MopinionOnEvaluateListener` interface.
 2. In your callback function, check the response parameters and retrieve the `formKey` if there is any.
@@ -166,7 +172,7 @@ It can also be used on passive events, but such forms will always be allowed to 
 Evaluates whether or not a form would have opened for the specified event. If without errors, the callback handler will receive the onMopinionEvaluate call with the response.
 
 ```java
-public void evaluate(String event, MopinionOnEvaluateListener callbackHandler)
+void evaluate(String event, MopinionOnEvaluateListener callbackHandler)
 
 ```
 Parameters:
@@ -191,13 +197,13 @@ Parameters:
 Opens the form specified by the formkey, regardless of any proactive conditions set in the deployment.
 
 ```java
-public void openFormAlways(String formKey) 
+void openFormAlways(String formKey) 
 ```
 Parameters:
 
 * `formKey`: key of a feedback form as provided by the onMopinionEvaluate() call.
 
-###Example of using evaluate()
+### Example of using evaluate()
 This snippet of pseudo code highlights the key points on how the aforementioned procedure fits together to implement the `Mopinion.MopinionOnEvaluateListener` interface.
 
 ```java
@@ -247,9 +253,149 @@ It's also possible to integrate the callback handler directly in the evaluate() 
 
 ```
 
-## Edit triggers
+## <a name="callback-mode">Using callback mode</a>
+By default the SDK manages the feedback form autonomously without further involving your app. 
+
+Version 0.3.0 introduces asynchronous callbacks to inform your code of certain actions (MopinionEvent). 
+
+Provide a callback handler to receive a response, containing either data or possible error information. 
+ 
+### Procedure overview
+
+1. Call the `event()` method and pass it a callback function that implements the `MopinionEventListener.onMopinionEvent` interface.
+2. In your callback function `onMopinionEvent()`, check the kind of `mopinionEvent` and optionally call `didSucceed()` or `hasErrors()` on the `response` to check for errors.
+3. Optionally, call `hasData()` on the `response` object to check if there is data.
+4. Depending on the kind of `mopinionEvent`, check for the presence of data specified by a `ResponseDataKey` using the call `hasData(ResponseDataKey)` on the `response`.
+5. To get the data, call `getString(ResponseDataKey)` respectively `getJSONObject(ResponseDataKey)` on the `response`, depending on the type of data to retrieve.
+
+You can also provide an optional error-callback handler to `event()` to seperately receive responses with error information. In that case the primary handler only receives responses without errors.
+
+### Callback variants of the event() method
+Triggers an event you defined in your deployment to open a form and receive MopinionEvent callbacks. If you don't specify a failHandler, the callback handler will also receive error responses.
+
+
+```java
+void event(String event, MopinionEventListener callbackHandler)
+void event(String event, MopinionEventListener callbackHandler, MopinionEventErrorListener failHandler)
+```
+
+Parameters:
+
+* `event`: The name of the event as definied in the deployment. For instance "_button".
+* `callbackHandler`: The method implementing the `MopinionEventListener` interface to handle the `onMopinionEvent()` callback.
+* `failHandler`: The method implementing the `MopinionEventErrorListener` interface to handle the `onMopinionEventError()` callback for MopinionEvents that resulted in errors.
+
+### Callback methods onMopinionEvent() and onMopinionEventError()
+
+These methods you implement in your code to receive MopinionEvents. They have the same parameters to pass you a response with optional additional information. 
+What information is provided depends on the type of `MopinionEvent` and its origin.
+
+```java
+void onMopinionEvent(MopinionEvent mopinionEvent, MopinionResponse response)
+void onMopinionEventError(MopinionEvent mopinionEvent, MopinionResponse response)
+```
+
+Parameters:
+
+* `mopinionEvent`: The kind of response event that you receive from the SDK. Currently one of the following:
+	* `FORM_OPEN` : when the form is shown
+	* `FORM_SENT` : when the user has submitted the form
+	* `FORM_CLOSED` : when the form has closed
+
+* `response`: The MopinionResponse object containing additional information on the MopinionEvent. The response is never `null`, but use its `hasData()` methods to check if it contains any additional data, or `hasErrors()` for errors.
+
+### MopinionResponse object
+The data collection present in this object depends on the kind of MopinionEvent and its origin. The data is a key-value collection. Both data and errors can be missing. The response object contains methods to inspect and retrieve them. 
+
+#### Getting data with response.get() and response.hasData()
+Check with `hasData(key)` first, as the `get<>(key)` methods can return `null`. Pass a standard `ResponseDataKey` to these methods for the data you're interested in.
+
+ResponseDataKey|Method to read it|Description
+---|---|---
+DATA_JSONOBJECT|.getJSONObject()|'raw' JSONObject with all available data
+FORM_KEY|.getString()|the internal unique identifier for the form
+FORM_NAME|.getString()|the name of the form. Distinct from the title of the form.
+
+#### MopinionEvents and provided data in response
+This is the data that can be present for a certain MopinionEvent:
+
+MopinionEvent|ResponseDataKeys|Remarks
+---|---|---
+FORM_OPEN|DATA_JSONOBJECT|
+ |FORM_KEY|
+ |FORM_NAME|
+FORM_SENT|DATA_JSONOBJECT|
+ |FORM_KEY|
+ |FORM_NAME|
+FORM_CLOSED|DATA_JSONOBJECT|Currently only automatically closed forms provide data 
+ |FORM_KEY|only when autoclosed
+ |FORM_NAME|only when autoclosed
+
+The order in which MopinionEvents occur is:
+
+	1. FORM_OPEN
+	2. FORM_SENT (only if the user submits a form)
+	3. FORM_CLOSED
+
+#### Reading response errors
+Call `response.hasErrors()` on, followed by `response.getErrorString()` to get the error as text.
+The `getErrorString()` method might return `null`.
+
+#### Callback handler example
+Pseudo code to show the usage of the `event()` callback using the involved objects.
+
+```java
+...
+Mopinion M = new Mopinion(this, yourdeploymentkey);
+...
+// open the form and wait for the events to appear
+M.event(event, new MopinionEventListener() {
+	@Override
+	public void onMopinionEvent(MopinionEvent mopinionEvent, MopinionResponse response) {
+		switch(mopinionEvent) {
+			case FORM_OPEN:
+				// specifies a default string if form key is null
+				Log.d("CallbackDemo","a form opened, form key = " + response.getString(ResponseDataKey.FORM_KEY, "unspecified"));
+				break;
+			case FORM_SENT:
+				try {
+					JSONObject jsonData = response.getJSONObject(ResponseDataKey.DATA_JSONOBJECT);
+					Log.d("CallbackDemo","User submitted the form, raw data object=" + jsonData.toString());
+				} catch (JSONException e) {
+					// something wrong with the json data
+					e.printStackTrace();
+				}
+				break;
+			case FORM_CLOSED:
+				if(response.hasData(ResponseDataKey.FORM_NAME)) {
+					Log.d("CallbackDemo", "The form '" + response.getString(ResponseDataKey.FORM_NAME) + "' closed");
+				} else {
+					Log.d("CallbackDemo", "The form closed, no name was given.");
+				}
+				break;
+			default:
+				 Log.d("CallbackDemo","Ignoring this event.");
+		}
+	}
+}, 
+// dedicated error handler
+new MopinionEventErrorListener() {
+	@Override
+	public void onMopinionEventError(MopinionEvent mopinionEvent, MopinionResponse response) {
+		if( response.hasErrors() ) {
+			Log.d("CallbackDemo","Event " + mopinionEvent.name() + " encountered an error:" + response.getErrorString());
+		}
+	}
+);
+
+```
+
+
+## <a name="edit-triggers">Edit triggers</a>
 In the Mopinion deployment editor you can define event names and triggers that will work with the SDK event names that you used in your app.
 Login to your Mopinion account and go to Data collection, Deployments to use this functionality.
+
+![Deployment Editor](images/deployment_edit_triggers.png)
 
 The custom defined events can be used in combination with rules/conditions:
 
