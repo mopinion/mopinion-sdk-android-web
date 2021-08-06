@@ -243,11 +243,11 @@ It's also possible to integrate the callback handler directly in the evaluate() 
 
 ```java
 ...
-		M.evaluate(event, new Mopinion.MopinionOnEvaluateListener() {
+	M.evaluate(event, new Mopinion.MopinionOnEvaluateListener() {
             @Override
             public void onMopinionEvaluate(boolean hasResult, String event, @Nullable String formKey, @Nullable JSONObject response) {
                 // here the code to check the parameters like hasResult, formKey, etc
-					...
+				...
             }
         });
 
@@ -322,14 +322,14 @@ This is the data that can be present for a certain MopinionEvent:
 MopinionEvent|ResponseDataKeys|Remarks
 ---|---|---
 FORM_OPEN|DATA_JSONOBJECT|
- |FORM_KEY|
- |FORM_NAME|
+&nbsp;|FORM_KEY|
+&nbsp;|FORM_NAME|
 FORM_SENT|DATA_JSONOBJECT|
- |FORM_KEY|
- |FORM_NAME|
+&nbsp;|FORM_KEY|
+&nbsp;|FORM_NAME|
 FORM_CLOSED|DATA_JSONOBJECT|Currently only automatically closed forms provide data 
- |FORM_KEY|only when autoclosed
- |FORM_NAME|only when autoclosed
+&nbsp;|FORM_KEY|only when autoclosed
+&nbsp;|FORM_NAME|only when autoclosed
 
 The order in which MopinionEvents occur is:
 
