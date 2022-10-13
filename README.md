@@ -46,7 +46,7 @@ In the main project `build.gradle` file add the following:
 allprojects {
     repositories {
         google()
-        maven { url 'http://jitpack.io' }
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
