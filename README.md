@@ -95,7 +95,7 @@ M.event(String event);
 ```
 
 * The `context` is the Activity context from which you would like to activate the feedback form, normally `this`.
-* The `key` should be replaced with your specific deployment key. This key can be found in your Mopinion account at the `Feedback forms` section under `Deployments`.
+* The `key` should be replaced with your specific deployment key. Copy this key using a web browser from your Mopinion account, in side menu `Data collection`, section `Deployments`, via the button with symbol `<>`.
 * The `log` flag can be set to `true` while developing the app to see Logcat messages in Android Studio from the Mopinion SDK library. (The default is `false` if not supplied.)
 * The `event` is a specific event that can be connected to a feedback form action in the Mopinion system.  
 The default `_button` event triggers the form, but an unlimited number of custom events can also be added.
