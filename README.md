@@ -18,13 +18,11 @@ There are also other Mopinion SDK's available:
 - [Using callback mode](#callback-mode)
 - [Edit triggers](#edit-triggers)
 
-## Release notes for version 0.3.0
+## Release notes for version 0.3.1
 
-### New features in 0.3.0
-- 2 new variants of the method `event()` add a asynchronous callback response `onMopinionEvent()`, to let you receive a certain `MopinionEvent` from the SDK about the feedback form.
-- Currently supported `MopinionEvents` are when the form is displayed, when the user submitted the form or when the form closed.
-- The callback includes an object `MopinionResponse` that can optionally contain data associated with some events. Data can be for example the form key, the form name or miscellanous data as JSONObject.
-- The new callback behaviour is optional. You don't need to change your existing code, the SDK by default will behave as before without making callbacks.
+### Changes in 0.3.1
+- Removed a testing configuration constant from the libary.
+- Compiled at API level 33.
 
 <br>
 
@@ -61,7 +59,7 @@ android {
 ...
 dependencies {
     ...
-	implementation 'com.mopinion:mopinion-sdk-web:0.3.0'
+	implementation 'com.mopinion:mopinion-sdk-web:0.3.1'
 }
 ```
 

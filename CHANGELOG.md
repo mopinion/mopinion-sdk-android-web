@@ -1,3 +1,9 @@
+# 0.3.0
+- New callback behaviour via 2 new variants of the method `event()` with asynchronous callback response `onMopinionEvent()`, to receive a `MopinionEvent` from the feedback form.
+- Supported callback `MopinionEvent` is when the form is displayed/closed or the user submitted the form.
+- The callback includes an object `MopinionResponse` with optional data from some events.
+- The new callback behaviour is optional. Existing code/methods continue to work unaltered.
+
 # 0.2.2
 - Artifact location change from bintray to jitpack as bintray stopped service. We no longer need `jcenter()` in the gradle files.
 - New method `evaluate()` and its asynchronous callback response `onMopinionEvaluate()` to verify whether or not a form would be opened for a specified event. 
