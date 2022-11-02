@@ -26,24 +26,36 @@ There are also other Mopinion SDK's available:
 
 <br>
 
-## <a name="install">install</a>
+## <a name="install">Installation</a>
 
-Install the Mopinion Mobile SDK Library by adding it to the `build.gradle` file of your project. The minimal required Android API level is 19.
+Install the Mopinion Mobile SDK Library by adding it to the `build.gradle` file of your project, as per instructions in section [Android Studio - Configure your app's build config](#configure). The minimal required Android API level is 19.
 
 Download our [Mopinion Forms](https://play.google.com/store/apps/details?id=com.mopinion.news) app from the Google Play Store to preview what your mobile forms will look like in your app.
 
 ### dependencies
 
-- [Google Volley](https://github.com/google/volley)
+- [Google Volley](https://github.com/google/volley) 
+
+Our instructions already include the installation   for the above external dependency, no additional steps needed.
 
 ### Android Studio
-
+#### <a name="configure">Configure your app's build config</a>
 In the main project `build.gradle` file add the following:
 
 ```gradle
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        ...
+    }
+    ...
+}
+...
 allprojects {
     repositories {
         google()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
     }
 }
@@ -59,6 +71,7 @@ android {
 ...
 dependencies {
     ...
+    implementation 'com.android.volley:volley:1.2.1'
 	implementation 'com.mopinion:mopinion-sdk-web:0.3.1'
 }
 ```
