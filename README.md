@@ -9,7 +9,7 @@ There are also other Mopinion SDK's available:
 
 - [iOS SDK (React Native required)](https://github.com/mopinion/mopinion-sdk-ios)
 - [iOS web SDK](https://github.com/mopinion/mopinion-sdk-ios-web)
-- [Android SDK, native Kotlin] (https://github.com/Mopinion-com/mopinion-sdk-android)
+- [Android SDK, native Kotlin](https://github.com/Mopinion-com/mopinion-sdk-android)
 - [Android SDK, deprecated (React Native required)](https://github.com/mopinion/mopinion-sdk-android)
 
 ### Contents
