@@ -7,7 +7,7 @@ To use Mopinion mobile feedback forms in your app you can include the SDK as a L
 
 There are also other Mopinion SDK's available:
 
-- [iOS SDK (React Native required)](https://github.com/mopinion/mopinion-sdk-ios)
+- [iOS SDK](https://github.com/Mopinion-com/mopinion-sdk-ios)
 - [iOS web SDK](https://github.com/mopinion/mopinion-sdk-ios-web)
 - [Android SDK, native Kotlin](https://github.com/Mopinion-com/mopinion-sdk-android)
 - [Android SDK, deprecated (React Native required)](https://github.com/mopinion/mopinion-sdk-android)
@@ -65,7 +65,10 @@ allprojects {
 }
 ```
 
- 
+P.S. Want to use GitHub packages instead of Jitpack? Then see our [addendum](README_Add_GitHubPackages.md) and then return to this README.
+
+<br>
+##### <a name="configure-module">Main module build.gradle</a>
 In the `build.gradle` file of your main module, add the Mopinion SDK Library:
 
 ```gradle
@@ -79,7 +82,8 @@ dependencies {
 	implementation 'com.mopinion:mopinion-sdk-web:0.3.1'
 }
 ```
-
+<br>
+##### AndroidManifest.xml
 The SDK needs to connect to the Mopinion servers so the internet permission should be added to your `AndroidManifest.xml`:
 
 ```xml
