@@ -1,6 +1,6 @@
 # Mopinion Mobile SDK for android
 
-_Looking for the full native SDK with native interface components? Check out our new SDK built in native Kotlin [here](https://github.com/Mopinion-com/mopinion-sdk-android)!_
+_This SDK is deprecated! Please use our latest Android Web SDK, find it [here](https://github.com/Mopinion-com/mopinion-sdk-android-web). Looking for our SDK with native interface components? Find our latest full SDK built in native Kotlin [here](https://github.com/Mopinion-com/mopinion-sdk-android)!_
 
 The Mopinion Mobile SDK can be used to collect feedback from Android apps based on events.
 To use Mopinion mobile feedback forms in your app you can include the SDK as a Library in your Android Studio project.
