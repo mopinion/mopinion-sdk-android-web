@@ -1,4 +1,4 @@
-# Mopinion Mobile SDK for android
+# Mopinion Mobile SDK for android (deprecated)
 
 _This SDK is deprecated! Please use our latest Android Web SDK, find it [here](https://github.com/Mopinion-com/mopinion-sdk-android-web). Looking for our SDK with native interface components? Find our latest full SDK built in native Kotlin [here](https://github.com/Mopinion-com/mopinion-sdk-android)!_
 
@@ -44,6 +44,9 @@ Our instructions already include the installation   for the above external depen
 
 ### Android Studio
 #### <a name="configure">Configure your app's build config</a>
+Use GitHub packages instead of Jitpack. See our [addendum](README_Add_GitHubPackages.md) and then return to this README at "Main module build.gradle".
+
+Note: Jitpack no longer works for new builds. The instructions for Jitpack were:
 In the main project `build.gradle` file add the following:
 
 ```gradle
@@ -64,8 +67,6 @@ allprojects {
     }
 }
 ```
-
-P.S. Want to use GitHub packages instead of Jitpack? Then see our [addendum](README_Add_GitHubPackages.md) and then return to this README.
 
 <br>
 ##### <a name="configure-module">Main module build.gradle</a>
