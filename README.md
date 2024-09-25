@@ -45,6 +45,7 @@ Our instructions already include the installation   for the above external depen
 ### Android Studio
 #### <a name="configure">Configure your app's build config</a>
 Use GitHub packages instead of Jitpack. See our [addendum](README_Add_GitHubPackages.md) and then return to this README at "Main module build.gradle".
+<br>
 
 Note: Jitpack no longer works for new builds. The instructions for Jitpack were:
 In the main project `build.gradle` file add the following:
@@ -68,8 +69,9 @@ allprojects {
 }
 ```
 
-<br>
+
 ##### <a name="configure-module">Main module build.gradle</a>
+
 In the `build.gradle` file of your main module, add the Mopinion SDK Library:
 
 ```gradle
@@ -84,6 +86,7 @@ dependencies {
 }
 ```
 <br>
+
 ##### AndroidManifest.xml
 The SDK needs to connect to the Mopinion servers so the internet permission should be added to your `AndroidManifest.xml`:
 
